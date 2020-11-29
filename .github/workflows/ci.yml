@@ -10,6 +10,7 @@ name: CI
 jobs:
   test:
     name: Test
+    runs-on: ubuntu-latest
     steps:
       - name: Set up Go
         uses: actions/setup-go@v2
