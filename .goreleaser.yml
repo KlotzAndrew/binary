@@ -1,18 +1,18 @@
-project_name: binary
+project_name: binary-project
 
 before:
   hooks:
     - go mod download
     - go generate ./...
 
-      # binary: bin/gh
-      # main: ./cmd/gh
 builds:
   - <<: &build_defaults
+      binary: cli-binary
+      main: .
       ldflags:
         - -X main.Version={{.Version}}
-        - -X main.Date={{time "2006-01-02"}}
-        - -X main.Commit={{.Commit}}
+        - -X main.Date={{.Date}}
+        - -X main.Commit={{.ShortCommit}}
       id: macos
       goos: [darwin]
       goarch: [amd64]
@@ -28,7 +28,6 @@ builds:
     id: windows
     goos: [windows]
     goarch: [386, amd64]
-
 
 archives:
   - replacements:
